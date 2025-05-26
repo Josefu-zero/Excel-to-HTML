@@ -374,6 +374,21 @@ th {
     text-align: center;
 }
 
+/* Estilo para el subencabezado */
+.tabla-estructurada thead tr.subheader {
+    background-color: #015a96; /* Color azul para subencabezado */
+    color: white;
+    font-weight: bold;
+}
+
+/* Estilo para las celdas del subencabezado */
+.tabla-estructurada thead tr.subheader th,
+.tabla-estructurada thead tr.subheader td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
 td {
     padding: 10px 15px;
     border: 1px solid #e0e0e0;
