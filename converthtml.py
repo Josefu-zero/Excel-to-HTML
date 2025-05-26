@@ -136,21 +136,6 @@ def procesar_tabla(ws, start_row, merged_cells):
     
     return html, end_row - start_row
 
-def deberia_ser_encabezado(df):
-    """
-    Determina si la primera fila del DataFrame debería ser tratada como encabezado.
-    """
-    
-    
-    primera_fila = df.iloc[0]
-    resto_tabla = df.iloc[1:]
-    
-    # Contar valores de texto en la primera fila vs el resto
-    textos_primera_fila = sum(isinstance(x, str) for x in primera_fila)
-    textos_resto = sum(isinstance(x, str) for x in resto_tabla.values.flatten())
-    
-    return textos_primera_fila > textos_resto / max(1, len(resto_tabla))
-
 
 
 def excel_a_html_multiple(archivo_excel, carpeta_salida='html_output'):
