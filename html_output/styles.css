@@ -9,91 +9,205 @@ body {
 }
 
 header {
-    background-color: #2c3e50;
+    background: linear-gradient(135deg, #2c3e50, #1a252f);
     color: white;
-    padding: 20px;
+    padding: 25px 20px;
     text-align: center;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: relative;
 }
 
-h1, h2, h3 {
-    margin: 0;
+h1 {
+    font-size: 28px;
+    margin-bottom: 15px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.contenido-hoja {
+    max-width: 98%;
+    margin: 30px auto;
+    padding: 0 20px;
+    overflow-x: auto;
+}
+
+/* Estilos para la tabla */
+.tabla-contenedor {
+    width: 100%;
+    margin: 25px 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.tabla-estructurada {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.9em;
+    min-width: 1200px;
+}
+
+.tabla-estructurada thead tr:first-child {
+    background: linear-gradient(135deg, #3498db, #2980b9);
+}
+
+.tabla-estructurada thead tr:first-child th {
+    font-size: 16px;
+    padding: 15px;
+    text-align: center;
+    border: none;
+    position: relative;
+}
+
+.tabla-estructurada thead tr:first-child th:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 15%;
+    height: 70%;
+    width: 1px;
+    background-color: rgba(255,255,255,0.3);
+}
+
+/* Subencabezado */
+.tabla-estructurada thead tr.subheader {
+    background: linear-gradient(135deg, #015a96, #013d63);
+    color: white;
+}
+
+.tabla-estructurada thead tr.subheader th {
+    padding: 12px 10px;
+    font-weight: 500;
+    text-align: left;
+    border-right: 1px solid rgba(255,255,255,0.1);
+}
+
+.tabla-estructurada thead tr.subheader th:last-child {
+    border-right: none;
+}
+
+/* Cuerpo de la tabla */
+.tabla-estructurada tbody tr {
+    transition: all 0.2s ease;
+}
+
+.tabla-estructurada tbody tr:hover {
+    background-color: #e8f4fc !important;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.tabla-estructurada tbody td {
+    padding: 12px 10px;
+    border: 1px solid #e0e0e0;
+    vertical-align: middle;
+}
+
+.tabla-estructurada tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+/* Estilos para celdas específicas */
+.tabla-estructurada td:first-child {
+    font-weight: 600;
+    color: #2c3e50;
+}
+
+.tabla-estructurada td[data-criticidad="Critico"] {
+    background-color: #ffecec;
+    color: #d32f2f;
     font-weight: 600;
 }
 
-.contenido-hoja, .contenedor-indice {
-    max-width: 1200px;
-    margin: 30px auto;
-    padding: 0 20px;
+.tabla-estructurada td[data-criticidad="No Critico"] {
+    background-color: #f0fff0;
+    color: #388e3c;
 }
 
-/* Estilos para el índice */
-.lista-indice {
-    list-style-type: none;
-    padding: 0;
-    margin: 30px 0;
-}
-
-.lista-indice li {
-    margin-bottom: 10px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    transition: transform 0.2s;
-}
-
-.lista-indice li:hover {
-    transform: translateX(5px);
-}
-
-.lista-indice a {
-    display: block;
-    padding: 15px 20px;
-    color: #2c3e50;
+/* Botón de volver */
+.btn-volver {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 18px;
+    background: rgba(255,255,255,0.15);
+    color: white;
     text-decoration: none;
-    font-size: 18px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+    border: 1px solid rgba(255,255,255,0.2);
+    backdrop-filter: blur(5px);
 }
 
-.lista-indice a:hover {
-    color: #3498db;
+.btn-volver:hover {
+    background: rgba(255,255,255,0.25);
+    transform: translateX(-3px);
 }
 
-.lista-indice i {
-    margin-right: 10px;
-    color: #3498db;
+.btn-volver i {
+    margin-right: 8px;
+    transition: all 0.3s ease;
 }
 
-/* Estilos para el contenido de las hojas */
-.texto-contenido {
-    margin: 20px 0;
-    padding: 15px;
-    background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    line-height: 1.8;
+.btn-volver:hover i {
+    transform: translateX(-2px);
 }
 
-.titulo-seccion {
-    font-size: 22px;
-    color: #2c3e50;
-    margin: 40px 0 20px 0;
-    padding-bottom: 10px;
-    border-bottom: 2px solid #3498db;
+/* Footer */
+footer {
+    text-align: center;
+    padding: 20px;
+    background: linear-gradient(135deg, #2c3e50, #1a252f);
+    color: white;
+    margin-top: 40px;
+    font-size: 14px;
 }
 
+/* Efectos de scroll para tablas grandes */
+@media (max-width: 1200px) {
+    .contenido-hoja {
+        overflow-x: auto;
+        padding: 0 10px;
+    }
+    
+    .tabla-contenedor {
+        margin: 15px 0;
+    }
+}
+
+/* Mejoras para la legibilidad */
+td {
+    line-height: 1.5;
+}
+
+/* Resaltar campos importantes */
+td[data-tipo="Maestro"] {
+    font-weight: 600;
+    color: #1a73e8;
+}
+
+td[data-tipo="Referencia"] {
+    color: #666;
+}
+/* Estilos para tablas - Versión mejorada */
 .tabla-contenedor {
     margin: 30px 0;
     overflow-x: auto;
     background-color: white;
-    border-radius: 5px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    padding: 1px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 0;
+    width: 100%;
+    min-width: 100%;
+    table-layout: fixed
 }
 
 table {
     border-collapse: collapse;
     width: 100%;
     margin: 0;
+    font-size: 0.95em;
+    min-width: 600px; /* Ancho mínimo para tablas responsivas */
 }
 
 th {
@@ -101,58 +215,108 @@ th {
     border: 1px solid #2980b9;
     color: white;
     font-weight: 600;
-    padding: 12px 15px;
+    padding: 14px 16px;
     text-align: center;
+    position: sticky;
+    top: 0;
 }
 
 /* Estilo para el subencabezado */
-.tabla-estructurada thead tr.subheader {
-    background-color: #015a96; /* Color azul para subencabezado */
+.tabla-estructurada thead tr.subheader th {
+    background-color: #2980b9;
     color: white;
-    font-weight: bold;
-}
-
-/* Estilo para las celdas del subencabezado */
-.tabla-estructurada thead tr.subheader th,
-.tabla-estructurada thead tr.subheader td {
-    padding: 8px;
+    font-weight: 500;
+    padding: 10px 16px;
     text-align: left;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
 }
 
 td {
-    padding: 10px 15px;
+    padding: 12px 16px;
     border: 1px solid #e0e0e0;
-    vertical-align: top;
+    vertical-align: middle;
+    line-height: 1.5;
 }
 
 tr:nth-child(even) {
     background-color: #f8f9fa;
 }
 
-.btn-volver {
-    display: inline-block;
-    margin-top: 20px;
-    padding: 10px 15px;
-    background-color: #3498db;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    transition: background-color 0.3s;
+tr:hover {
+    background-color: #f1f7fd;
 }
 
-.btn-volver:hover {
-    background-color: #2980b9;
+/* Estilo para celdas especiales */
+td.destacado {
+    background-color: #e3f2fd;
+    font-weight: 500;
+    color: #1976d2;
 }
 
-.btn-volver i {
-    margin-right: 5px;
+td.negativo {
+    color: #e53935;
+    font-weight: 500;
 }
 
-footer {
-    text-align: center;
-    padding: 20px;
+td.positivo {
+    color: #43a047;
+    font-weight: 500;
+}
+
+/* Bordes redondeados para la tabla */
+table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Cabecera con gradiente */
+.tabla-estructurada thead tr:first-child th {
+    background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+}
+
+/* Estilo para tablas compactas */
+.tabla-compacta th,
+.tabla-compacta td {
+    padding: 8px 12px;
+    font-size: 0.9em;
+}
+
+/* Estilo para tablas con bordes visibles */
+.tabla-bordeada {
+    border: 1px solid #e0e0e0;
+}
+
+.tabla-bordeada th,
+.tabla-bordeada td {
+    border: 1px solid #e0e0e0;
+}
+
+/* Estilo para celdas de encabezado izquierdo */
+th.celda-izquierda {
+    text-align: left;
     background-color: #2c3e50;
-    color: white;
-    margin-top: 40px;
+}
+
+/* Efecto de transición para filas */
+tr {
+    transition: background-color 0.2s ease;
+}
+
+/* Scroll personalizado para tablas con overflow */
+.tabla-contenedor::-webkit-scrollbar {
+    height: 8px;
+}
+
+.tabla-contenedor::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.tabla-contenedor::-webkit-scrollbar-thumb {
+    background: #3498db;
+    border-radius: 4px;
+}
+
+.tabla-contenedor::-webkit-scrollbar-thumb:hover {
+    background: #2980b9;
 }
