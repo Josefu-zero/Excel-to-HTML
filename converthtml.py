@@ -21,10 +21,10 @@ def es_texto_aislado(ws, row_idx, merged_cells):
     first_cell_value = str(row[0].value).strip() if row[0].value else ""
     if first_cell_value and first_cell_value.isupper() and len(first_cell_value) > 10:
         return True
-    
+        
     return False
 
-def procesar_texto_aislado(ws, row_idx, merged_cells):
+def procesar_texto_aislado(ws, row_idx, merged_cells,sheet_name):
     """
     Procesa una fila de texto aislado y devuelve el HTML correspondiente.
     """
@@ -45,11 +45,13 @@ def procesar_texto_aislado(ws, row_idx, merged_cells):
         
         if cell_value is not None:
             contenido.append(str(cell_value).strip())
-    
+    # No agregar nada si el texto es igual al nombre de la hoja (sheet_name)
+    if contenido and " ".join(contenido).strip() == sheet_name:
+        return ""
     texto = " ".join(contenido).strip()
     
     # Determinar si es un título
-    if texto.isupper() and len(texto) > 10:
+    if texto.isupper() and len(texto) > 7:
         return f'<h2 class="titulo-seccion">{texto}</h2>\n'
     else:
         return f'<div class="texto-contenido">{texto}</div>\n'
@@ -156,6 +158,14 @@ def excel_a_html_multiple(archivo_excel, carpeta_salida='html_output'):
     for sheet_name in wb.sheetnames:
         ws = wb[sheet_name]
         nombre_archivo = f"{slugify(sheet_name)}.html"
+        # Tomar el primer texto no vacío de la hoja como nombre de sección si existe
+        for row in ws.iter_rows(min_row=1, max_row=ws.max_row):
+            for cell in row:
+                if cell.value is not None and str(cell.value).strip() != "":
+                    sheet_name = str(cell.value).strip()
+                    break
+            if sheet_name != ws.title:
+                break
         indice.append({'nombre': sheet_name, 'archivo': nombre_archivo})
         
         # Crear HTML para esta hoja
@@ -215,7 +225,7 @@ def generar_html_hoja(ws, sheet_name, nombre_archivo_excel):
         if not row_empty:
             # Determinar si es texto aislado o parte de una tabla
             if es_texto_aislado(ws, current_row, merged_cells):
-                html += procesar_texto_aislado(ws, current_row, merged_cells)
+                html += procesar_texto_aislado(ws, current_row, merged_cells,sheet_name)
                 current_row += 1
             else:
                 # Procesar como tabla

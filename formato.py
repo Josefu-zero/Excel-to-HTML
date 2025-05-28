@@ -32,6 +32,8 @@ def convert_second_row_to_subheader(html_file):
         file.write(str(soup))
     print(f"Archivo {html_file} modificado exitosamente")
 
+
+
 # Procesar los archivos HTML
 archivos_a_procesar = [
     'html_output/planes-de-remediación.html',
