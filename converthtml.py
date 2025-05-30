@@ -156,16 +156,21 @@ def excel_a_html_multiple(archivo_excel, carpeta_salida='html_output'):
     
     # Procesar cada hoja del libro
     for sheet_name in wb.sheetnames:
+        if sheet_name.strip().lower() == "índice":
+            continue
         ws = wb[sheet_name]
         nombre_archivo = f"{slugify(sheet_name)}.html"
         # Tomar el primer texto no vacío de la hoja como nombre de sección si existe
+        newname = None
         for row in ws.iter_rows(min_row=1, max_row=ws.max_row):
             for cell in row:
                 if cell.value is not None and str(cell.value).strip() != "":
+                    newname = str(cell.value).strip()
                     sheet_name = str(cell.value).strip()
                     break
-            if sheet_name != ws.title:
+            if newname  is not None:
                 break
+            
         indice.append({'nombre': sheet_name, 'archivo': nombre_archivo})
         
         # Crear HTML para esta hoja
@@ -238,7 +243,10 @@ def generar_html_hoja(ws, sheet_name, nombre_archivo_excel):
     html += f"""
     </div>
     <footer>
-        <p>{nombre_archivo_excel} - &copy; 2025</p>
+        <div class="footer-flex">
+            <img src="azul_secretaria-de-gobierno-digital-y-tecnología-de-la-información-y-comunicaciones.png" alt="Logo secretaria de Gobierno Digital y Tecnología de la Información y Comunicaciones">
+            <span>&copy; 2025</span>
+        </div>
     </footer>
 </body>
 </html>
@@ -270,7 +278,10 @@ def generar_indice(indice, carpeta_salida, nombre_archivo_excel):
     html += f"""        </ul>
     </div>
     <footer>
-        <p>{nombre_archivo_excel} - &copy; 2077</p>
+        <div class="footer-flex">
+            <img src="azul_secretaria-de-gobierno-digital-y-tecnología-de-la-información-y-comunicaciones.png" alt="Logo secretaria de Gobierno Digital y Tecnología de la Información y Comunicaciones">
+            <span>&copy; 2025</span>
+        </div>
     </footer>
 </body>
 </html>
@@ -288,7 +299,7 @@ body {
 }
 
 header {
-    background: linear-gradient(135deg, #2c3e50, #1a252f);
+    background: linear-gradient(135deg, #28367f, #28367f);
     color: white;
     padding: 25px 20px;
     text-align: center;
@@ -350,8 +361,9 @@ h1 {
 
 /* Subencabezado */
 .tabla-estructurada thead tr.subheader {
-    background: linear-gradient(135deg, #015a96, #013d63);
+    background: linear-gradient(135deg, #1275bb, #1275bb);
     color: white;
+    font-weight: 600;
 }
 
 .tabla-estructurada thead tr.subheader th {
@@ -389,7 +401,7 @@ h1 {
 /* Estilos para celdas específicas */
 .tabla-estructurada td:first-child {
     font-weight: 600;
-    color: #2c3e50;
+    color: #ffffff;
 }
 
 .tabla-estructurada td[data-criticidad="Critico"] {
@@ -408,18 +420,18 @@ h1 {
     display: inline-flex;
     align-items: center;
     padding: 10px 18px;
-    background: rgba(255,255,255,0.15);
+    background: rgba(204, 204, 204,0.15);
     color: white;
     text-decoration: none;
     border-radius: 50px;
     transition: all 0.3s ease;
     font-size: 14px;
-    border: 1px solid rgba(255,255,255,0.2);
+    border: 1px solid rgba(204, 204, 204,0.2);
     backdrop-filter: blur(5px);
 }
 
 .btn-volver:hover {
-    background: rgba(255,255,255,0.25);
+    background: rgba(204, 204, 204,0.25);
     transform: translateX(-3px);
 }
 
@@ -436,10 +448,24 @@ h1 {
 footer {
     text-align: center;
     padding: 20px;
-    background: linear-gradient(135deg, #2c3e50, #1a252f);
+    background: linear-gradient(135deg, #28367f, #28367f);
     color: white;
     margin-top: 40px;
     font-size: 14px;
+    
+}
+
+.footer-flex {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0px;
+}
+
+.footer-flex img {
+    max-height: 110px;
+    display: block;
+    margin: 0;
 }
 
 /* Efectos de scroll para tablas grandes */
@@ -550,7 +576,7 @@ table {
 
 /* Cabecera con gradiente */
 .tabla-estructurada thead tr:first-child th {
-    background: linear-gradient(135deg, #3498db 0%, #2c3e50 100%);
+    background: linear-gradient(135deg, #28367f 0%, #28367f 100%);
 }
 
 /* Estilo para tablas compactas */
@@ -592,13 +618,15 @@ tr {
 }
 
 .tabla-contenedor::-webkit-scrollbar-thumb {
-    background: #3498db;
+    background: #6ebce9;
     border-radius: 4px;
 }
 
 .tabla-contenedor::-webkit-scrollbar-thumb:hover {
-    background: #2980b9;
+    background: #1275bb;
 }
+
+
 """
     
     # Guardar archivos
@@ -615,7 +643,7 @@ tr {
 
 if __name__ == "__main__":
     print("Procesando archivo Excel...")
-    indice = excel_a_html_multiple('Libro Domio Infraestructura Urbana.xlsx')
+    indice = excel_a_html_multiple('Libro Dominio Infraestructura Urbana.xlsx')
     print(f"Proceso completado. Se generaron {len(indice)} archivos HTML.")
     print(f"Archivo índice creado en: html_output/index.html")
     
