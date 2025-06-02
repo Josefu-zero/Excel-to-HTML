@@ -338,7 +338,7 @@ h1 {
 }
 
 .tabla-estructurada thead tr:first-child {
-    background: linear-gradient(135deg, #3498db, #2980b9);
+    background: linear-gradient(135deg, #1275bb, #2980b9);
 }
 
 .tabla-estructurada thead tr:first-child th {
@@ -399,10 +399,6 @@ h1 {
 }
 
 /* Estilos para celdas específicas */
-.tabla-estructurada td:first-child {
-    font-weight: 600;
-    color: #ffffff;
-}
 
 .tabla-estructurada td[data-criticidad="Critico"] {
     background-color: #ffecec;
@@ -428,6 +424,10 @@ h1 {
     font-size: 14px;
     border: 1px solid rgba(204, 204, 204,0.2);
     backdrop-filter: blur(5px);
+    position: absolute;
+    left: 30px;
+    top: 40px;
+    z-index: 2;
 }
 
 .btn-volver:hover {
@@ -452,11 +452,12 @@ footer {
     color: white;
     margin-top: 40px;
     font-size: 14px;
-    
+
 }
 
 .footer-flex {
     display: flex;
+    flex-direction: column; /* Cambia a columna */
     align-items: center;
     justify-content: center;
     gap: 0px;
@@ -474,7 +475,7 @@ footer {
         overflow-x: auto;
         padding: 0 10px;
     }
-    
+
     .tabla-contenedor {
         margin: 15px 0;
     }
@@ -517,7 +518,7 @@ table {
 
 th {
     background-color: #3498db;
-    border: 1px solid #2980b9;
+    border: 1px solid #1275bb;
     color: white;
     font-weight: 600;
     padding: 14px 16px;
@@ -528,7 +529,7 @@ th {
 
 /* Estilo para el subencabezado */
 .tabla-estructurada thead tr.subheader th {
-    background-color: #2980b9;
+    background-color: #1275bb;
     color: white;
     font-weight: 500;
     padding: 10px 16px;
@@ -555,7 +556,7 @@ tr:hover {
 td.destacado {
     background-color: #e3f2fd;
     font-weight: 500;
-    color: #1976d2;
+    color: #1275bb;
 }
 
 td.negativo {
@@ -625,6 +626,9 @@ tr {
 .tabla-contenedor::-webkit-scrollbar-thumb:hover {
     background: #1275bb;
 }
+
+
+
 
 
 """
