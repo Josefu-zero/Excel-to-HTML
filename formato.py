@@ -41,3 +41,32 @@ archivos_a_procesar = [
 
 for archivo in archivos_a_procesar:
     convert_second_row_to_subheader(archivo)
+
+from bs4 import BeautifulSoup
+
+def limpiar_versionamiento(html_file):
+    """
+    Elimina la primera tabla y el primer texto del archivo versionamiento.html
+    """
+    with open(html_file, 'r', encoding='utf-8') as file:
+        html_content = file.read()
+    
+    soup = BeautifulSoup(html_content, 'html.parser')
+    
+    # Eliminar la primera tabla
+    primera_tabla = soup.find('div', class_='tabla-contenedor')
+    if primera_tabla:
+        primera_tabla.decompose()
+    
+    # Eliminar el primer texto con clase 'texto-contenido'
+    textos_contenido = soup.find_all('div', class_='texto-contenido')
+    if len(textos_contenido) > 0:
+        textos_contenido[0].decompose()
+    
+    # Guardar los cambios
+    with open(html_file, 'w', encoding='utf-8') as file:
+        file.write(str(soup))
+    print(f"Archivo {html_file} modificado exitosamente")
+
+# Uso de la función
+limpiar_versionamiento('html_output/versionamiento.html')
