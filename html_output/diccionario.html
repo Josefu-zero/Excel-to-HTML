@@ -48,11 +48,11 @@
 <tbody>
 
 <tr>
-<td>INF0001</td>
+<td>SMIP0001</td>
 <td>Fecha de conexión</td>
 <td>Fecha y hora que el usuario se conecta a la red de servicio municipal de internet publico</td>
 <td>Critico</td>
-<td>Abierto </td>
+<td>Abierto</td>
 <td>Maestro</td>
 <td>Servicio municipal de internet público</td>
 <td>NA</td>
@@ -68,31 +68,11 @@
 <td></td>
 </tr>
 <tr>
-<td>INF0002</td>
+<td>SMIP0002</td>
 <td>MAC Usuario</td>
 <td>La MAC (Media Access Control) de un dispositivo móvil es una dirección física única que identifica a ese dispositivo del usuario dentro de una red.</td>
-<td>No Critico</td>
-<td>Personal</td>
-<td>Referencia</td>
-<td>Servicio municipal de internet público</td>
-<td>NA</td>
-<td>SRV11BDD44\SQLCONSULTAS</td>
-<td>SERVICIO_MUNICIPAL_INTERNET_PUBLICO
-</td>
-<td></td>
-<td></td>
-<td>50</td>
-<td>-</td>
-<td>No</td>
-<td>varchar</td>
-<td></td>
-</tr>
-<tr>
-<td>INF0003</td>
-<td>MAC dispositivo</td>
-<td>La MAC (Media Access Control) de un Access Point (AP) es la dirección física única que identifica su interfaz de red dentro de una red local.</td>
 <td>Critico</td>
-<td>Abierto</td>
+<td>Personal</td>
 <td>Maestro</td>
 <td>Servicio municipal de internet público</td>
 <td>NA</td>
@@ -108,15 +88,35 @@
 <td></td>
 </tr>
 <tr>
-<td>INF0004</td>
+<td>SMIP0003</td>
+<td>MAC dispositivo</td>
+<td>La MAC (Media Access Control) de un Access Point (AP) es la dirección física única que identifica su interfaz de red dentro de una red local.</td>
+<td>Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Servicio municipal de internet público</td>
+<td>NA</td>
+<td>SRV11BDD44\SQLCONSULTAS</td>
+<td>SERVICIO_MUNICIPAL_INTERNET_PUBLICO
+</td>
+<td></td>
+<td></td>
+<td>50</td>
+<td>-</td>
+<td>No</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>SMIP0004</td>
 <td>Tipo de identificación</td>
 <td>El tipo de identificación se refiere a la clasificación oficial del documento que una persona utiliza para acreditar su identidad ante el Estado y entidades públicas o privadas.
 * Cédula de Identidad.
 * Pasaporte.
 * RUC (Registro Único de Contribuyentes)</td>
-<td>No Critico</td>
-<td>Abierto</td>
-<td>Referencia</td>
+<td>Critico</td>
+<td>Personal</td>
+<td>Lista de referencia</td>
 <td>Servicio municipal de internet público</td>
 <td>NA</td>
 <td>SRV11BDD44\SQLCONSULTAS</td>
@@ -131,12 +131,12 @@
 <td></td>
 </tr>
 <tr>
-<td>INF0005</td>
+<td>SMIP0005</td>
 <td>Identificación</td>
 <td>El documento de identidad o ciudadanía es el documento oficial de identificación personal emitido por la entidad oficial. La cedula de identiadad es número único de identificación de 10 dígitos.</td>
 <td>Critico</td>
 <td>Personal</td>
-<td>Maestro</td>
+<td>Lista de referencia</td>
 <td>Servicio municipal de internet público</td>
 <td>NA</td>
 <td>SRV11BDD44\SQLCONSULTAS</td>

@@ -158,6 +158,8 @@ def excel_a_html_multiple(archivo_excel, carpeta_salida='html_output'):
     for sheet_name in wb.sheetnames:
         if sheet_name.strip().lower() == "índice":
             continue
+        if sheet_name.strip().lower() == "datoscbox":
+            continue
         ws = wb[sheet_name]
         nombre_archivo = f"{slugify(sheet_name)}.html"
         # Tomar el primer texto no vacío de la hoja como nombre de sección si existe
