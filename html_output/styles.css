@@ -337,7 +337,10 @@ tr {
     background: #1275bb;
 }
 
-
-
-
+/* Resalta los porcentajes (Usar si es necesario)
+.percentage-cell {
+    text-align: right;
+    font-weight: bold;
+    color: #0056b3; 
+}*/
 

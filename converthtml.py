@@ -3,6 +3,8 @@ from openpyxl import load_workbook
 from openpyxl.utils import range_boundaries
 import os
 
+## Author: Joseph A. Jimenez J.
+## Josefu-Zero
 
 def es_texto_aislado(ws, row_idx, merged_cells):
     """
@@ -70,11 +72,12 @@ def procesar_tabla(ws, start_row, merged_cells):
     
     # Crear DataFrame con el rango de la tabla
     data = []
-    for row in ws.iter_rows(min_row=start_row, max_row=end_row-1):
+    for row_idx in range(start_row, end_row):
         row_data = []
-        for cell in row:
+        for cell in ws[row_idx]:
             cell_value = cell.value
-            
+            cell_number_format = cell.number_format # Get the number format
+
             # Manejar celdas combinadas
             for merged in merged_cells:
                 if cell.coordinate in merged['range']:
@@ -83,6 +86,12 @@ def procesar_tabla(ws, start_row, merged_cells):
                     else:
                         cell_value = None
                     break
+            
+            # Process percentage values
+            if isinstance(cell_value, (int, float)) and '%' in cell_number_format:
+                cell_value = f"{cell_value:.2%}" # Format as percentage with 2 decimal places
+            elif cell_value is not None:
+                cell_value = str(cell_value).strip() # Ensure it's a string for other values
             
             row_data.append(cell_value)
         data.append(row_data)
@@ -127,8 +136,12 @@ def procesar_tabla(ws, start_row, merged_cells):
         html += '  <tbody>\n'
         for _, row in df.iloc[1:].iterrows():
             html += '    <tr>\n'
-            for cell in row:
-                html += f'      <td>{cell if cell is not None else ""}</td>\n'
+            for cell_value in row:
+                # Add a class for percentage cells if you want specific styling
+                if isinstance(cell_value, str) and cell_value.endswith('%'):
+                    html += f'      <td class="percentage-cell">{cell_value if cell_value is not None else ""}</td>\n'
+                else:
+                    html += f'      <td>{cell_value if cell_value is not None else ""}</td>\n'
             html += '    </tr>\n'
         html += '  </tbody>\n</table>\n'
     else:
@@ -629,9 +642,12 @@ tr {
     background: #1275bb;
 }
 
-
-
-
+/* Resalta los porcentajes (Usar si es necesario)
+.percentage-cell {
+    text-align: right;
+    font-weight: bold;
+    color: #0056b3; 
+}*/
 
 """
     
@@ -652,4 +668,3 @@ if __name__ == "__main__":
     indice = excel_a_html_multiple('Libro Dominio Infraestructura Urbana.xlsx')
     print(f"Proceso completado. Se generaron {len(indice)} archivos HTML.")
     print(f"Archivo índice creado en: html_output/index.html")
-    
