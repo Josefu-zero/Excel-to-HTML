@@ -25,5 +25,5 @@ __pycache__/
 # Archivos temporales generales
 *.bak
 *.tmp
-Libro Dominio Infraestructura Urbana - V3.xlsx
-converthtmlold.py
+
+oldver/
