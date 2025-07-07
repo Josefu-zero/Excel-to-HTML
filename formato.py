@@ -40,13 +40,3 @@ def convert_second_row_to_subheader(html_file):
     with open(html_file, 'w', encoding='utf-8') as file:
         file.write(str(soup))
     print(f"Archivo {html_file} modificado exitosamente")
-
-# Procesar los archivos HTML
-archivos_a_procesar = [
-    'html_output/planes-de-remediación.html',
-    'html_output/calidad.html',
-    'html_output/diccionario.html'
-]
-
-for archivo in archivos_a_procesar:
-    convert_second_row_to_subheader(archivo)
