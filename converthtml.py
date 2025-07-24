@@ -9,16 +9,37 @@ import os
 import requests
 from io import BytesIO
 import re
+from dotenv import load_dotenv
+from shareplum import Site, Office365
+from shareplum.site import Version
 
-def descargar_excel_desde_github(url_github):
+# Cargar variables del entorno
+load_dotenv()  # Busca automáticamente el archivo .env
+
+def descargar_excel_desde_sharepoint():
     try:
-        # Descargar el archivo
-        response = requests.get(url_github)
-        response.raise_for_status() # Verificar errores
+        # Obtener credenciales desde .env
+        sitio_url = os.getenv("SHAREPOINT_URL")
+        nombre_sitio = os.getenv("SHAREPOINT_SITE")
+        ruta_documento = os.getenv("SHAREPOINT_DOC_PATH")
+        nombre_archivo = os.getenv("SHAREPOINT_FILE")
+        usuario = os.getenv("SHAREPOINT_USER")
+        password = os.getenv("SHAREPOINT_PASSWORD")
+
+        # Autenticación
+        authcookie = Office365(
+            sitio_url, 
+            username=usuario, 
+            password=password
+        ).GetCookies()
         
-        return BytesIO(response.content)
+        site = Site(nombre_sitio, version=Version.v365, authcookie=authcookie)
+        folder = site.Folder(ruta_documento)
+        archivo = folder.get_file(nombre_archivo)
+        
+        return BytesIO(archivo)
     except Exception as e:
-        print(f"Error al descargar el archivo: {e}")
+        print(f"Error al descargar desde SharePoint: {e}")
         return None
 
 def es_texto_aislado(ws, row_idx, merged_cells):
@@ -235,19 +256,20 @@ def generar_indice(indice, carpeta_salida, nombre_archivo_excel):
     with open(os.path.join(carpeta_salida, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(html)
 
-def excel_a_html_multiple(url_github, carpeta_salida='html_output'):
-    # Descargar y procesar el archivo Excel desde GitHub
-    contenido = descargar_excel_desde_github(url_github)
+def excel_a_html_multiple_sharepoint(sitio_url, nombre_sitio, ruta_documento, nombre_archivo, usuario, password, carpeta_salida='html_output'):
+    # Descargar y procesar el archivo Excel desde SharePoint
+    contenido = descargar_excel_desde_sharepoint(sitio_url, nombre_sitio, ruta_documento, nombre_archivo, usuario, password)
     if contenido is None:
         return []
+    
     wb = load_workbook(contenido, data_only=True)
     os.makedirs(carpeta_salida, exist_ok=True)
-    # Lista para almacenar el índice de archivos generados
+    
+    # Resto del código permanece igual...
     indice = []
-    # Obtener el nombre del archivo Excel desde la URL
-    nombre_archivo_excel = os.path.splitext(os.path.basename(url_github))[0]
+    nombre_archivo_excel = os.path.splitext(nombre_archivo)[0]
     print(f"Procesando archivo: {nombre_archivo_excel}")
-    # Procesar cada hoja del libro de trabajo
+    
     for sheet_name in wb.sheetnames:
         if sheet_name.strip().lower() in ["índice", "datoscbox"]:
             continue
