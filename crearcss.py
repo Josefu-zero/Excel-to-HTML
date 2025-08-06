@@ -346,7 +346,7 @@ tr {
 
 """
 def crear_css():
-    with open('html_output/styles.css', 'w', encoding='utf-8') as file:
+    with open('html_output/css/styles.css', 'w', encoding='utf-8') as file:
         file.write(css)
     print("Archivo CSS creado exitosamente en 'css/estilos.css'")
 

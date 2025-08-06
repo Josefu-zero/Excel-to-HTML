@@ -11,45 +11,85 @@ from io import BytesIO
 import re
 from dotenv import load_dotenv
 from office365.runtime.auth.authentication_context import AuthenticationContext
+from office365.runtime.client_request_exception import ClientRequestException
 from office365.sharepoint.client_context import ClientContext
 
 # Cargar variables del entorno
 load_dotenv()  # Busca automáticamente el archivo .env
 
 
-def descargar_excel_desde_sharepoint():
+def listar_archivos_excel_en_sharepoint():
     try:
-        # Obtener variables
-        sitio_url = os.getenv("SHAREPOINT_SITE")  # Usamos la URL completa aquí
-        usuario = os.getenv("SHAREPOINT_USER")
-        password = os.getenv("SHAREPOINT_PASSWORD")
-        ruta_documento = os.getenv("SHAREPOINT_DOC_PATH")
-        nombre_archivo = os.getenv("SHAREPOINT_FILE")
-
-        # Autenticación
-        ctx_auth = AuthenticationContext(sitio_url)
-        if not ctx_auth.acquire_token_for_user(usuario, password):
+        sitio_url = os.getenv("SHAREPOINT_URL")
+        sitio_completo = f"{sitio_url}/{os.getenv('SHAREPOINT_SITE')}"
+        ctx_auth = AuthenticationContext(sitio_completo)
+        print(f"Autenticando en {sitio_completo} con usuario {os.getenv('SHAREPOINT_USER')}")
+        if not ctx_auth.acquire_token_for_user(os.getenv("SHAREPOINT_USER"), os.getenv("SHAREPOINT_PASSWORD")):
             raise ValueError("Error de autenticación")
 
-        # Contexto del cliente
-        ctx = ClientContext(sitio_url, ctx_auth)
+        ctx = ClientContext(sitio_completo, ctx_auth)
+        carpeta = ctx.web.get_folder_by_server_relative_url(os.getenv("SHAREPOINT_DOC_PATH"))
+        archivos = carpeta.files
+        ctx.load(archivos)
+        ctx.execute_query()
 
-        # Descargar archivo
-        file_url = f"{ruta_documento}/{nombre_archivo}"
-        file = ctx.web.get_file_by_server_relative_url(file_url)
+        return [archivo.properties["Name"] for archivo in archivos if archivo.properties["Name"].endswith('.xlsx')]
+    
+    except ClientRequestException as e:
+        print(f"Error al listar archivos: {e}")
+        return []
+
+def descargar_excel_desde_sharepoint(nombre_archivo):
+    try:
+        sitio_url = os.getenv("SHAREPOINT_URL")
+        sitio_completo = f"{sitio_url}/{os.getenv('SHAREPOINT_SITE')}"
+        ctx_auth = AuthenticationContext(sitio_completo)
+        if not ctx_auth.acquire_token_for_user(os.getenv("SHAREPOINT_USER"), os.getenv("SHAREPOINT_PASSWORD")):
+            raise ValueError("Error de autenticación")
+        
+        ctx = ClientContext(sitio_completo, ctx_auth)
+        file_url = f"{os.getenv('SHAREPOINT_DOC_PATH')}/{nombre_archivo}"
+        file = ctx.web.get_file_by_server_relative_path(file_url)
         ctx.load(file)
         ctx.execute_query()
 
-        # Guardar en BytesIO
         file_content = BytesIO()
         file.download(file_content).execute_query()
         file_content.seek(0)
-
         return file_content
-
     except Exception as e:
-        print(f"Error al descargar desde SharePoint: {e}")
+        print(f"Error al descargar {nombre_archivo}: {e}")
         return None
+
+def procesar_todos_los_excel():
+    archivos_excel = listar_archivos_excel_en_sharepoint()
+    indice_general = []
+    
+    for archivo in archivos_excel:
+        print(f"Procesando: {archivo}")
+        contenido = descargar_excel_desde_sharepoint(archivo)
+        if contenido:
+            nombre_base = os.path.splitext(archivo)[0]
+            print(f"Creando carpeta para: {nombre_base}")
+            carpeta_salida = f"html_output/{nombre_base}"
+            os.makedirs(carpeta_salida, exist_ok=True)
+            
+            # Procesar el archivo (usando tu función existente)
+            indice_archivo = excel_a_html_multiple(nombre_base,contenido, carpeta_salida)
+            carpeta_salida =f"{nombre_base}"## Uso unico para el nombre de la carpeta
+            indice_general.append({
+                'nombre': nombre_base,
+                'archivo': f"{carpeta_salida}/index.html"
+            })
+    
+    # Generar índice general
+    if indice_general:
+        generar_indice_general(indice_general)
+        print(f"Índice general creado en: html_output/indice.html")
+    else:
+        print("No se encontraron archivos .xlsx en la carpeta.")
+    
+    return indice_general
 
 def es_texto_aislado(ws, row_idx, merged_cells):
     """
@@ -194,7 +234,7 @@ def generar_html_hoja(ws, sheet_name, nombre_archivo_excel):
 <head>
     <meta charset=\"UTF-8\">
     <title>{sheet_name} - {nombre_archivo_excel}</title>
-    <link rel=\"stylesheet\" href=\"styles.css\">
+    <link rel="stylesheet" href="../css/styles.css">
     <link rel=\"stylesheet\" href=\"https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css\">
 </head>
 <body>
@@ -224,7 +264,7 @@ def generar_html_hoja(ws, sheet_name, nombre_archivo_excel):
     </div>
     <footer>
         <div class=\"footer-flex\">
-            <img src=\"azul_sdgdtic.png\" alt=\"Logo\">
+            <img src="../assets/azul_sdgdtic.png" alt="Logo secretaria de Gobierno Digital y Tecnología de la Información y Comunicaciones">
             <span>&copy; 2025</span>
         </div>
     </footer>
@@ -239,10 +279,14 @@ def generar_indice(indice, carpeta_salida, nombre_archivo_excel):
 <head>
     <meta charset=\"UTF-8\">
     <title>Indice - {nombre_archivo_excel}</title>
-    <link rel=\"stylesheet\" href=\"styles.css\">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
 </head>
 <body>
-    <header><h1>{nombre_archivo_excel}</h1></header>
+    <header><h1>{nombre_archivo_excel}
+    </h1>
+    <a href="../indice.html " class="btn-volver"><i class="fas fa-arrow-left"></i> Volver al índice de Libros</a>
+    </header>
     <div class=\"contenedor-indice\">
         <h2>Indice de Contenidos</h2>
         <ul class=\"lista-indice\">
@@ -254,7 +298,7 @@ def generar_indice(indice, carpeta_salida, nombre_archivo_excel):
         </div>
         <footer>
             <div class="footer-flex">
-                <img src="azul_sdgdtic.png" alt="Logo secretaria de Gobierno Digital y Tecnología de la Información y Comunicaciones">
+                <img src="../assets/azul_sdgdtic.png" alt="Logo secretaria de Gobierno Digital y Tecnología de la Información y Comunicaciones">
                 <span>&copy; 2025</span>
             </div>
         </footer>
@@ -265,17 +309,15 @@ def generar_indice(indice, carpeta_salida, nombre_archivo_excel):
     with open(os.path.join(carpeta_salida, 'index.html'), 'w', encoding='utf-8') as f:
         f.write(html)
 
-def excel_a_html_multiple(carpeta_salida='html_output'):
-    # Descargar desde SharePoint (usando la nueva función)
-    contenido = descargar_excel_desde_sharepoint()  # <-- Ahora sin argumentos
-    if contenido is None:
+def excel_a_html_multiple(nombre_base, contenido_excel, carpeta_salida='html_output'):  # <-- Ahora recibe 2 parámetros
+    if contenido_excel is None:
         return []
     
-    wb = load_workbook(contenido, data_only=True)
+    wb = load_workbook(contenido_excel, data_only=True)
     os.makedirs(carpeta_salida, exist_ok=True)
     
     # Obtener el nombre del archivo desde .env
-    nombre_archivo = os.getenv("SHAREPOINT_FILE")  # <-- Ahora se lee desde .env
+    nombre_archivo = nombre_base
     if not nombre_archivo:
         raise ValueError("La variable SHAREPOINT_FILE no está definida en .env")
     
@@ -290,7 +332,6 @@ def excel_a_html_multiple(carpeta_salida='html_output'):
         ws = wb[sheet_name]
         titulo_hoja = None
         
-        # Buscar el primer texto no vacío como título
         for row in ws.iter_rows(min_row=1, max_row=ws.max_row):
             for cell in row:
                 if cell.value is not None and str(cell.value).strip() != "":
@@ -309,3 +350,37 @@ def excel_a_html_multiple(carpeta_salida='html_output'):
     
     generar_indice(indice, carpeta_salida, nombre_archivo_excel)
     return indice
+
+
+def generar_indice_general(indice, carpeta_salida='html_output'):
+
+    html = f"""<!DOCTYPE html>
+<html>
+<head>
+    <meta charset=\"UTF-8\">
+    <title>Libros de Dominios</title>
+    <link rel=\"stylesheet\" href=\"css/styles.css\">
+</head>
+<body>
+    <header><h1>Libros de Dominos</h1></header>
+    <div class=\"contenedor-indice\">
+        <h2>Indice de Contenidos</h2>
+        <ul class=\"lista-indice\">
+"""
+    for item in indice:
+        html += f'<li><a href="{item["archivo"]}">{item["nombre"]}</a></li>\n'
+    
+    html += f"""        </ul>
+        </div>
+        <footer>
+            <div class="footer-flex">
+                <img src="assets/azul_sdgdtic.png" alt="Logo secretaria de Gobierno Digital y Tecnología de la Información y Comunicaciones">
+                <span>&copy; 2025</span>
+            </div>
+        </footer>
+    </body>
+    </html>
+    """
+    
+    with open(f"{carpeta_salida}/indice.html", 'w', encoding='utf-8') as f:
+        f.write(html)
