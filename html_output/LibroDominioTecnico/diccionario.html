@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Detalle de campos del Directorio Activo - LibroDominioTecnico</title>
+<link href="../css/styles.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<header>
+<h1>Detalle de campos del Directorio Activo</h1>
+<a class="btn-volver" href="index.html"><i class="fas fa-arrow-left"></i> Volver al índice</a>
+</header>
+<div class="contenido-hoja">
+<div class="tabla-contenedor">
+<table class="tabla-estructurada">
+<thead>
+<tr>
+<th colspan="3">Elemento de Datos</th>
+<th colspan="2">Criticidad</th>
+<th colspan="2">Tipo de campo</th>
+<th colspan="10">Metadatos</th>
+</tr>
+<tr class="subheader">
+<td>Código de campo</td>
+<td>Nombre Campo</td>
+<td>Descripción del campo</td>
+<td>Nivel de Criticidad</td>
+<td>Clasificación de datos</td>
+<td>Tipo de dato</td>
+<td>Sistema</td>
+<td>Fórmula de Cálculo</td>
+
+
+
+<td>Nombre del campo 
+(Fuente Oficial)</td>
+<td>Longitud del campo (Fuente Oficial)</td>
+<td>Lista de Valores Válidos</td>
+<td>Acepta valores Nulos</td>
+<td>Tipo de dato</td>
+<td>Fecha Aprobada</td>
+</tr></thead>
+<tbody>
+<tr>
+<td>AD0001</td>
+<td>Usuario DN</td>
+<td>Nombre distinguido completo del usuario en el directorio activo que identifica de manera única su ubicación en el árbol de directorio</td>
+<td>Critico</td>
+<td>Personal</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>distinguishedName</td>
+<td>255</td>
+<td>-</td>
+<td>No</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0002</td>
+<td>Usuario SAM</td>
+<td>Nombre de cuenta SAM (Security Account Manager) del usuario utilizado para autenticación en el dominio</td>
+<td>Critico</td>
+<td>Personal</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>sAMAccountName</td>
+<td>20</td>
+<td>-</td>
+<td>No</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0003</td>
+<td>Usuario UPN</td>
+<td>Nombre principal de usuario (User Principal Name) que identifica de manera única al usuario en el dominio</td>
+<td>Critico</td>
+<td>Personal</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>userPrincipalName</td>
+<td>255</td>
+<td>-</td>
+<td>No</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0004</td>
+<td>Nombre completo</td>
+<td>Nombre y apellido completo del usuario registrado en el directorio activo</td>
+<td>Critico</td>
+<td>Personal</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>displayName</td>
+<td>255</td>
+<td>-</td>
+<td>No</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0005</td>
+<td>Nombre</td>
+<td>Nombre o nombres del usuario</td>
+<td>No Critico</td>
+<td>Personal</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>givenName</td>
+<td>64</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0006</td>
+<td>Apellido</td>
+<td>Apellido o apellidos del usuario</td>
+<td>Critico</td>
+<td>Personal</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>sn</td>
+<td>64</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0007</td>
+<td>Correo electrónico</td>
+<td>Dirección de correo electrónico principal del usuario</td>
+<td>Critico</td>
+<td>Personal</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>mail</td>
+<td>255</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0008</td>
+<td>Teléfono</td>
+<td>Número de teléfono del usuario</td>
+<td>Critico</td>
+<td>Personal</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>telephoneNumber</td>
+<td>64</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0009</td>
+<td>Departamento</td>
+<td>Departamento o área de trabajo del usuario</td>
+<td>Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>department</td>
+<td>64</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0010</td>
+<td>Cargo</td>
+<td>Puesto o cargo del usuario en la organización</td>
+<td>No Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>title</td>
+<td>128</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0011</td>
+<td>Empresa</td>
+<td>Nombre de la empresa u organización</td>
+<td>No Critico</td>
+<td>Abierto</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>company</td>
+<td>64</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0012</td>
+<td>Oficina</td>
+<td>Ubicación física de la oficina del usuario</td>
+<td>No Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>physicalDeliveryOfficeName</td>
+<td>128</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0013</td>
+<td>Administrador</td>
+<td>Nombre del administrador o supervisor directo del usuario</td>
+<td>Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>manager</td>
+<td>255</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0014</td>
+<td>Fecha creación</td>
+<td>Fecha y hora de creación de la cuenta de usuario en el directorio activo</td>
+<td>Critico</td>
+<td>Abierto</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>whenCreated</td>
+<td>-</td>
+<td>-</td>
+<td>No</td>
+<td>datetime</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0015</td>
+<td>Fecha modificación</td>
+<td>Fecha y hora de la última modificación de la cuenta de usuario</td>
+<td>Critico</td>
+<td>Abierto</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>whenChanged</td>
+<td>-</td>
+<td>-</td>
+<td>No</td>
+<td>datetime</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0016</td>
+<td>Último inicio sesión</td>
+<td>Fecha y hora del último inicio de sesión del usuario</td>
+<td>Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>lastLogonTimestamp</td>
+<td>-</td>
+<td>-</td>
+<td>Sí</td>
+<td>datetime</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0017</td>
+<td>Fecha expiración</td>
+<td>Fecha de expiración de la cuenta de usuario</td>
+<td>Critico</td>
+<td>Abierto</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>accountExpires</td>
+<td>-</td>
+<td>-</td>
+<td>Sí</td>
+<td>datetime</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0018</td>
+<td>Estado cuenta</td>
+<td>Estado actual de la cuenta de usuario en el directorio activo</td>
+<td>Critico</td>
+<td>Abierto</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>userAccountControl</td>
+<td>4</td>
+<td>• Habilitado • Deshabilitado • Bloqueado • Expirado</td>
+<td>No</td>
+<td>int</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0019</td>
+<td>Contraseña última modificación</td>
+<td>Fecha y hora de la última modificación de la contraseña del usuario</td>
+<td>Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>pwdLastSet</td>
+<td>-</td>
+<td>-</td>
+<td>Sí</td>
+<td>datetime</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0020</td>
+<td>Grupos membresía</td>
+<td>Lista de grupos de seguridad de los cuales el usuario es miembro</td>
+<td>Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>memberOf</td>
+<td>255</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0021</td>
+<td>Unidad organizacional</td>
+<td>Unidad organizacional donde está ubicado el objeto usuario</td>
+<td>Critico</td>
+<td>Abierto</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>canonicalName</td>
+<td>255</td>
+<td>-</td>
+<td>No</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0022</td>
+<td>Descripción</td>
+<td>Descripción adicional o comentarios sobre la cuenta de usuario</td>
+<td>No Critico</td>
+<td>Abierto</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>description</td>
+<td>1024</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0023</td>
+<td>Directorio home</td>
+<td>Ruta del directorio personal del usuario en el servidor</td>
+<td>No Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>homeDirectory</td>
+<td>255</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0024</td>
+<td>Perfil de usuario</td>
+<td>Ruta del perfil de usuario en el servidor</td>
+<td>No Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>profilePath</td>
+<td>255</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+<tr>
+<td>AD0025</td>
+<td>Script de inicio</td>
+<td>Script que se ejecuta cuando el usuario inicia sesión</td>
+<td>No Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+
+
+
+<td>scriptPath</td>
+<td>255</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="texto-contenido">Campos de Grupos de Seguridad</div>
+<div class="tabla-contenedor">
+<table class="tabla-estructurada">
+<thead>
+<tr>
+<th>AD0026</th>
+<th>Grupo DN</th>
+<th>Nombre distinguido completo del grupo de seguridad en el directorio activo</th>
+<th>Critico</th>
+<th>Restringido</th>
+<th>Maestro</th>
+<th>Directorio Activo</th>
+<th>NA</th>
+<th>SRV-DC01\ADSERVER</th>
+<th>Active Directory</th>
+<th>Groups</th>
+<th>distinguishedName</th>
+<th>255</th>
+<th>-</th>
+<th>No</th>
+<th>varchar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AD0027</td>
+<td>Grupo SAM</td>
+<td>Nombre de cuenta SAM del grupo de seguridad</td>
+<td>Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+<td>SRV-DC01\ADSERVER</td>
+<td>Active Directory</td>
+<td>Groups</td>
+<td>sAMAccountName</td>
+<td>255</td>
+<td>-</td>
+<td>No</td>
+<td>varchar</td>
+</tr>
+<tr>
+<td>AD0028</td>
+<td>Nombre grupo</td>
+<td>Nombre descriptivo del grupo de seguridad</td>
+<td>Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+<td>SRV-DC01\ADSERVER</td>
+<td>Active Directory</td>
+<td>Groups</td>
+<td>name</td>
+<td>255</td>
+<td>-</td>
+<td>No</td>
+<td>varchar</td>
+</tr>
+<tr>
+<td>AD0029</td>
+<td>Tipo de grupo</td>
+<td>Tipo de grupo que define su funcionalidad y alcance</td>
+<td>Critico</td>
+<td>Abierto</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+<td>SRV-DC01\ADSERVER</td>
+<td>Active Directory</td>
+<td>Groups</td>
+<td>groupType</td>
+<td>4</td>
+<td>• Seguridad Global • Seguridad Local • Seguridad Universal • Distribución Global • Distribución Local • Distribución Universal</td>
+<td>No</td>
+<td>int</td>
+</tr>
+<tr>
+<td>AD0030</td>
+<td>Miembros grupo</td>
+<td>Lista de usuarios que pertenecen al grupo de seguridad</td>
+<td>Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+<td>SRV-DC01\ADSERVER</td>
+<td>Active Directory</td>
+<td>Groups</td>
+<td>member</td>
+<td>255</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="texto-contenido">Campos de Equipos</div>
+<div class="tabla-contenedor">
+<table class="tabla-estructurada">
+<thead>
+<tr>
+<th>AD0031</th>
+<th>Equipo DN</th>
+<th>Nombre distinguido completo del equipo en el directorio activo</th>
+<th>Critico</th>
+<th>Restringido</th>
+<th>Maestro</th>
+<th>Directorio Activo</th>
+<th>NA</th>
+<th>SRV-DC01\ADSERVER</th>
+<th>Active Directory</th>
+<th>Computers</th>
+<th>distinguishedName</th>
+<th>255</th>
+<th>-</th>
+<th>No</th>
+<th>varchar</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AD0032</td>
+<td>Nombre equipo</td>
+<td>Nombre NetBIOS del equipo en la red</td>
+<td>Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+<td>SRV-DC01\ADSERVER</td>
+<td>Active Directory</td>
+<td>Computers</td>
+<td>name</td>
+<td>15</td>
+<td>-</td>
+<td>No</td>
+<td>varchar</td>
+</tr>
+<tr>
+<td>AD0033</td>
+<td>DNS nombre</td>
+<td>Nombre DNS completo del equipo</td>
+<td>Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+<td>SRV-DC01\ADSERVER</td>
+<td>Active Directory</td>
+<td>Computers</td>
+<td>dNSHostName</td>
+<td>255</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+</tr>
+<tr>
+<td>AD0034</td>
+<td>Sistema operativo</td>
+<td>Sistema operativo instalado en el equipo</td>
+<td>Critico</td>
+<td>Abierto</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+<td>SRV-DC01\ADSERVER</td>
+<td>Active Directory</td>
+<td>Computers</td>
+<td>operatingSystem</td>
+<td>255</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+</tr>
+<tr>
+<td>AD0035</td>
+<td>Versión SO</td>
+<td>Versión específica del sistema operativo</td>
+<td>Critico</td>
+<td>Abierto</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+<td>SRV-DC01\ADSERVER</td>
+<td>Active Directory</td>
+<td>Computers</td>
+<td>operatingSystemVersion</td>
+<td>255</td>
+<td>-</td>
+<td>Sí</td>
+<td>varchar</td>
+</tr>
+<tr>
+<td>AD0036</td>
+<td>Último inicio sesión equipo</td>
+<td>Fecha y hora del último inicio de sesión del equipo en el dominio</td>
+<td>Critico</td>
+<td>Restringido</td>
+<td>Maestro</td>
+<td>Directorio Activo</td>
+<td>NA</td>
+<td>SRV-DC01\ADSERVER</td>
+<td>Active Directory</td>
+<td>Computers</td>
+<td>lastLogonTimestamp</td>
+<td>-</td>
+<td>-</td>
+<td>Sí</td>
+<td>datetime</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<footer>
+<div class="footer-flex">
+<img alt="Logo secretaria de Gobierno Digital y Tecnología de la Información y Comunicaciones" src="../assets/azul_sdgdtic.png"/>
+<span>© 2025</span>
+</div>
+</footer>
+</body>
+</html>

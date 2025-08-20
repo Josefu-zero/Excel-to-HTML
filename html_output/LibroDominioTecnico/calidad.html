@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+<meta charset="utf-8"/>
+<title>Base Línea Calidad - LibroDominioTecnico</title>
+<link href="../css/styles.css" rel="stylesheet"/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+</head>
+<body>
+<header>
+<h1>Base Línea Calidad</h1>
+<a class="btn-volver" href="index.html"><i class="fas fa-arrow-left"></i> Volver al índice</a>
+</header>
+<div class="contenido-hoja">
+<div class="tabla-contenedor">
+<table class="tabla-estructurada">
+<thead>
+<tr>
+<th>Base Línea Calidad</th>
+<th>97.00%</th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+</div>
+<div class="texto-contenido">% Calidad: 80%</div>
+<div class="tabla-contenedor">
+<table class="tabla-estructurada">
+<thead>
+<tr>
+<th colspan="2">Fuente</th>
+<th colspan="3">Reglas de Negocio</th>
+<th colspan="6">Resultados y Planes de Remediación</th>
+<th colspan="3">Actualización</th>
+</tr>
+<tr class="subheader">
+<td>Código Atributo</td>
+<td>Atributo</td>
+<td>Descripción de la regla</td>
+<td>Estado de la Regla</td>
+<td>Dimensión de calidad</td>
+<td>Registros Válidos</td>
+<td>Registros Evaluados</td>
+<td>%Calidad</td>
+<td>Meta</td>
+<td>Brecha Meta</td>
+<td>Plan de Remediación</td>
+<td>Fecha Línea Base</td>
+<td>Fecha Última Modificación</td>
+<td>Versión</td>
+</tr></thead>
+<tbody>
+
+<tr>
+<td>AD0001</td>
+<td>Usuario DN</td>
+<td>El nombre distinguido del usuario es un atributo requerido, debe ser diferente de vacío o nulo, y debe seguir la sintaxis LDAP correcta.</td>
+<td>Implementado</td>
+<td>1. Completitud</td>
+<td>4850</td>
+<td>5000</td>
+<td class="percentage-cell">97.00%</td>
+<td class="percentage-cell">100.00%</td>
+<td class="percentage-cell">3.00%</td>
+<td>Validación automática en creación de usuarios</td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0001</td>
+<td>Usuario DN</td>
+<td>El nombre distinguido debe contener únicamente caracteres válidos según RFC 4514 y no debe exceder 255 caracteres.</td>
+<td>Implementado</td>
+<td>3. Validez</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0002</td>
+<td>Usuario SAM</td>
+<td>El nombre SAM es un atributo requerido, debe ser diferente de vacío o nulo, y no debe contener espacios en blanco.</td>
+<td>Implementado</td>
+<td>1. Completitud</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0002</td>
+<td>Usuario SAM</td>
+<td>El nombre SAM debe ser único en el dominio y no debe exceder 20 caracteres.</td>
+<td>Implementado</td>
+<td>2. Unicidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0002</td>
+<td>Usuario SAM</td>
+<td>El nombre SAM no debe contener caracteres especiales no permitidos: / \ [ ] : ;</td>
+<td>= , + * ? &lt; &gt; "</td>
+<td>Implementado</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>Filtro de caracteres en interfaz</td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+</tr>
+<tr>
+<td>AD0003</td>
+<td>Usuario UPN</td>
+<td>El UPN es un atributo requerido, debe ser diferente de vacío o nulo, y debe seguir formato de correo electrónico.</td>
+<td>Implementado</td>
+<td>1. Completitud</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0003</td>
+<td>Usuario UPN</td>
+<td>El UPN debe ser único en el bosque de Active Directory y contener un dominio válido.</td>
+<td>Implementado</td>
+<td>2. Unicidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0004</td>
+<td>Nombre completo</td>
+<td>El nombre completo es un atributo requerido, debe ser diferente de vacío o nulo, y no debe contener solo espacios.</td>
+<td>Implementado</td>
+<td>1. Completitud</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0004</td>
+<td>Nombre completo</td>
+<td>El nombre completo debe tener entre 2 y 255 caracteres y no debe contener caracteres especiales no permitidos.</td>
+<td>Implementado</td>
+<td>3. Validez</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0005</td>
+<td>Nombre</td>
+<td>El nombre debe contener únicamente caracteres alfabéticos y espacios, sin números ni caracteres especiales.</td>
+<td>Implementado</td>
+<td>3. Validez</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0006</td>
+<td>Apellido</td>
+<td>El apellido debe contener únicamente caracteres alfabéticos y espacios, sin números ni caracteres especiales.</td>
+<td>Implementado</td>
+<td>3. Validez</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0007</td>
+<td>Correo electrónico</td>
+<td>El correo electrónico debe seguir formato RFC 5322 válido cuando esté presente.</td>
+<td>Implementado</td>
+<td>3. Validez</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0007</td>
+<td>Correo electrónico</td>
+<td>El correo electrónico debe ser único en el dominio cuando esté presente.</td>
+<td>Implementado</td>
+<td>2. Unicidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0008</td>
+<td>Teléfono</td>
+<td>El teléfono debe contener únicamente números, espacios, guiones y paréntesis cuando esté presente.</td>
+<td>Implementado</td>
+<td>3. Validez</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0009</td>
+<td>Departamento</td>
+<td>El departamento debe existir en el catálogo de departamentos organizacionales cuando esté presente.</td>
+<td>Implementado</td>
+<td>4. Puntualidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0010</td>
+<td>Cargo</td>
+<td>El cargo debe existir en el catálogo de cargos organizacionales cuando esté presente.</td>
+<td>Implementado</td>
+<td>4. Puntualidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0014</td>
+<td>Fecha creación</td>
+<td>La fecha de creación no puede ser nula y debe ser una fecha válida en formato datetime.</td>
+<td>Implementado</td>
+<td>1. Completitud</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0014</td>
+<td>Fecha creación</td>
+<td>La fecha de creación no puede ser futura ni anterior al año 2000.</td>
+<td>Implementado</td>
+<td>3. Validez</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0015</td>
+<td>Fecha modificación</td>
+<td>La fecha de modificación no puede ser nula y debe ser igual o posterior a la fecha de creación.</td>
+<td>Implementado</td>
+<td>1. Completitud</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0015</td>
+<td>Fecha modificación</td>
+<td>La fecha de modificación no puede ser futura.</td>
+<td>Implementado</td>
+<td>3. Validez</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0016</td>
+<td>Último inicio sesión</td>
+<td>La fecha de último inicio de sesión debe ser posterior a la fecha de creación cuando esté presente.</td>
+<td>Implementado</td>
+<td>4. Puntualidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0017</td>
+<td>Fecha expiración</td>
+<td>La fecha de expiración debe ser posterior a la fecha de creación cuando esté presente.</td>
+<td>Implementado</td>
+<td>4. Puntualidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0018</td>
+<td>Estado cuenta</td>
+<td>El estado de la cuenta debe ser uno de los valores válidos: Habilitado, Deshabilitado, Bloqueado, Expirado.</td>
+<td>Implementado</td>
+<td>3. Validez</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0019</td>
+<td>Contraseña última modificación</td>
+<td>La fecha de última modificación de contraseña debe ser posterior a la fecha de creación cuando esté presente.</td>
+<td>Implementado</td>
+<td>4. Puntualidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0020</td>
+<td>Grupos membresía</td>
+<td>Los grupos en la lista de membresía deben existir en el Active Directory.</td>
+<td>Implementado</td>
+<td>4. Puntualidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0021</td>
+<td>Unidad organizacional</td>
+<td>La unidad organizacional debe existir en la estructura del Active Directory.</td>
+<td>Implementado</td>
+<td>4. Puntualidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0026</td>
+<td>Grupo DN</td>
+<td>El nombre distinguido del grupo es un atributo requerido, debe ser diferente de vacío o nulo, y debe seguir la sintaxis LDAP correcta.</td>
+<td>Implementado</td>
+<td>1. Completitud</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0027</td>
+<td>Grupo SAM</td>
+<td>El nombre SAM del grupo es un atributo requerido, debe ser único y no debe contener espacios en blanco.</td>
+<td>Implementado</td>
+<td>2. Unicidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0029</td>
+<td>Tipo de grupo</td>
+<td>El tipo de grupo debe ser uno de los valores válidos definidos en Active Directory.</td>
+<td>Implementado</td>
+<td>3. Validez</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0030</td>
+<td>Miembros grupo</td>
+<td>Los miembros del grupo deben existir como objetos válidos en el Active Directory.</td>
+<td>Implementado</td>
+<td>4. Puntualidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0031</td>
+<td>Equipo DN</td>
+<td>El nombre distinguido del equipo es un atributo requerido, debe ser diferente de vacío o nulo, y debe seguir la sintaxis LDAP correcta.</td>
+<td>Implementado</td>
+<td>1. Completitud</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0032</td>
+<td>Nombre equipo</td>
+<td>El nombre del equipo debe ser único en el dominio y seguir las convenciones de nomenclatura NetBIOS.</td>
+<td>Implementado</td>
+<td>2. Unicidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0033</td>
+<td>DNS nombre</td>
+<td>El nombre DNS debe ser único y seguir las convenciones de nomenclatura DNS cuando esté presente.</td>
+<td>Implementado</td>
+<td>2. Unicidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0034</td>
+<td>Sistema operativo</td>
+<td>El sistema operativo debe ser uno de los valores reconocidos por la organización cuando esté presente.</td>
+<td>Implementado</td>
+<td>4. Puntualidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0029</td>
+<td>Tipo de grupo</td>
+<td>El tipo de grupo debe ser uno de los valores válidos definidos en Active Directory.</td>
+<td>Implementado</td>
+<td>3. Validez</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0030</td>
+<td>Miembros grupo</td>
+<td>Los miembros del grupo deben existir como objetos válidos en el Active Directory.</td>
+<td>Implementado</td>
+<td>4. Puntualidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0031</td>
+<td>Equipo DN</td>
+<td>El nombre distinguido del equipo es un atributo requerido, debe ser diferente de vacío o nulo, y debe seguir la sintaxis LDAP correcta.</td>
+<td>Implementado</td>
+<td>1. Completitud</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0032</td>
+<td>Nombre equipo</td>
+<td>El nombre del equipo debe ser único en el dominio y seguir las convenciones de nomenclatura NetBIOS.</td>
+<td>Implementado</td>
+<td>2. Unicidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0033</td>
+<td>DNS nombre</td>
+<td>El nombre DNS debe ser único y seguir las convenciones de nomenclatura DNS cuando esté presente.</td>
+<td>Implementado</td>
+<td>2. Unicidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0034</td>
+<td>Sistema operativo</td>
+<td>El sistema operativo debe ser uno de los valores reconocidos por la organización cuando esté presente.</td>
+<td>Implementado</td>
+<td>4. Puntualidad</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+<tr>
+<td>AD0036</td>
+<td>Último inicio sesión equipo</td>
+<td>La fecha de último inicio de sesión del equipo debe ser posterior a la fecha de creación cuando esté presente.</td>
+<td>Implementado</td>
+<td>4. Puntualidad</td>
+<td>1050</td>
+<td>1100</td>
+<td class="percentage-cell">95.45%</td>
+<td class="percentage-cell">100.00%</td>
+<td class="percentage-cell">4.55%</td>
+<td>Validación de coherencia temporal</td>
+<td>2025-07-14 00:00:00</td>
+<td>2025-07-14 00:00:00</td>
+<td>1.0</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<footer>
+<div class="footer-flex">
+<img alt="Logo secretaria de Gobierno Digital y Tecnología de la Información y Comunicaciones" src="../assets/azul_sdgdtic.png"/>
+<span>© 2025</span>
+</div>
+</footer>
+</body>
+</html>
