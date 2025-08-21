@@ -92,19 +92,26 @@ def procesar_todos_los_excel():
     return indice_general
 
 def es_texto_aislado(ws, row_idx, merged_cells):
-    """
-    Determina si una fila contiene texto aislado (no parte de una tabla estructurada).
-    """
     row = ws[row_idx]
-    # Contar celdas con contenido
-    celdas_con_contenido = sum(1 for cell in row if cell.value is not None)
-    # Si hay menos de 2 celdas con contenido, es texto aislado
-    if celdas_con_contenido < 2:
+    
+    # Considerar celdas combinadas en el conteo
+    celdas_contenido = 0
+    for cell in row:
+        cell_value = obtener_valor_celda_combinada(ws, row_idx, cell.column, merged_cells)
+        if cell_value is not None and str(cell_value).strip():
+            celdas_contenido += 1
+    
+    if celdas_contenido < 2:
         return True
-    # Verificar si es un título de sección
+    
+    # Verificar patrón de título
     first_cell_value = str(row[0].value).strip() if row[0].value else ""
-    if first_cell_value and first_cell_value.isupper() and len(first_cell_value) > 10:
+    if (first_cell_value and 
+        first_cell_value.isupper() and 
+        len(first_cell_value) > 10 and
+        celdas_contenido < 3):  # Máximo 2 celdas para títulos
         return True
+    
     return False
 
 def procesar_texto_aislado(ws, row_idx, merged_cells, sheet_name):
@@ -135,6 +142,25 @@ def procesar_texto_aislado(ws, row_idx, merged_cells, sheet_name):
     else:
         return f'<div class="texto-contenido">{texto}</div>\n'
 
+def obtener_valor_celda_combinada(ws, row_idx, col_idx, merged_cells):
+    """
+    Devuelve el valor correcto para una celda, manejando celdas combinadas.
+    Si la celda es parte de un rango combinado, devuelve el valor de la primera celda.
+    Si no, devuelve el valor normal de la celda.
+    """
+    for merged in merged_cells:
+        min_row, min_col, max_row, max_col = merged['bounds']
+        if (min_row <= row_idx <= max_row and 
+            min_col <= col_idx <= max_col):
+            # Si es la primera celda del rango, devolver su valor
+            if row_idx == min_row and col_idx == min_col:
+                return merged['value']
+            # Si no es la primera celda, devolver None (celda combinada)
+            else:
+                return None
+    # Si no está en ningún rango combinado, devolver valor normal
+    return ws.cell(row=row_idx, column=col_idx).value
+
 def procesar_tabla(ws, start_row, merged_cells):
     """
     Procesa una tabla desde la fila start_row y devuelve el HTML y número de filas procesadas.
@@ -146,29 +172,26 @@ def procesar_tabla(ws, start_row, merged_cells):
         if es_texto_aislado(ws, end_row, merged_cells):
             break
         end_row += 1
+    
     # Crear DataFrame con el rango de la tabla
     data = []
     for row_idx in range(start_row, end_row):
         row_data = []
-        for cell in ws[row_idx]:
-            cell_value = cell.value
-            cell_number_format = cell.number_format # Obtener el formato de número de la celda
-            # Manejar celdas combinadas
-            for merged in merged_cells:
-                if cell.coordinate in merged['range']:
-                    if (cell.row, cell.column) == merged['first_cell']:
-                        cell_value = merged['value']
-                    else:
-                        cell_value = None
-                    break
+        for col_idx in range(1, ws.max_column + 1):  # Columnas de 1 a max_column
+            # Usar función auxiliar para celdas combinadas
+            cell_value = obtener_valor_celda_combinada(ws, row_idx, col_idx, merged_cells)
+            cell = ws.cell(row=row_idx, column=col_idx)
+            cell_number_format = cell.number_format
+            
             # Process percentage values
             if isinstance(cell_value, (int, float)) and '%' in cell_number_format:
-                cell_value = f"{cell_value:.2%}"# Convertir a porcentaje con dos decimales
+                cell_value = f"{cell_value:.2%}"# Convertir a porcentaje con 2 decimales
             elif cell_value is not None:
-                cell_value = str(cell_value).strip()# Convertir a cadena
+                cell_value = str(cell_value).strip()# convertir a string y eliminar espacios
+            
             row_data.append(cell_value)
         data.append(row_data)
-
+    
     # Limpiar DataFrame (eliminar filas/columnas completamente vacías)
     df = pd.DataFrame(data).dropna(how='all').dropna(axis=1, how='all')
     # Generar HTML de la tabla
@@ -220,15 +243,18 @@ def slugify(texto):
 
 def generar_html_hoja(ws, sheet_name, nombre_archivo_excel):
     """Genera el HTML para una hoja específica"""
-    # Procesar celdas combinadas
+    # Procesar celdas combinadas - VERSIÓN CORREGIDA
     merged_cells = []
-    for merged_range in ws.merged_cells.ranges:
-        min_row, min_col, max_row, max_col = range_boundaries(str(merged_range))
-        merged_cells.append({
-            'range': merged_range,
-            'value': ws.cell(row=min_row, column=min_col).value,
-            'first_cell': (min_row, min_col)
-        })
+    if ws.merged_cells.ranges:
+        for merged_range in ws.merged_cells.ranges:
+            # Convertir el rango a coordenadas
+            min_col, min_row, max_col, max_row = merged_range.bounds
+            merged_cells.append({
+                'range': merged_range,
+                'value': ws.cell(row=min_row, column=min_col).value,
+                'first_cell': (min_row, min_col),
+                'bounds': (min_row, min_col, max_row, max_col)  # Para fácil verificación
+            })
     html = f"""<!DOCTYPE html>
 <html>
 <head>

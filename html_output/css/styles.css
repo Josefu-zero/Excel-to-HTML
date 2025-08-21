@@ -31,15 +31,22 @@ h1 {
     overflow-x: auto;
 }
 
-/* Estilos para la tabla */
+/* Estilos para tablas - Versión mejorada */
 .tabla-contenedor {
-    width: 100%;
-    margin: 25px 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    margin: 30px 0;
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 70vh;
+    background-color: white;
     border-radius: 8px;
-    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    padding: 0;
+    width: 100%;
+    min-width: 100%;
+    table-layout: fixed;
 }
 
+/* Estructura de tabla unificada */
 .tabla-estructurada {
     width: 100%;
     border-collapse: collapse;
@@ -47,16 +54,15 @@ h1 {
     min-width: 1200px;
 }
 
-.tabla-estructurada thead tr:first-child {
-    background: linear-gradient(135deg, #1275bb, #2980b9);
-}
-
 .tabla-estructurada thead tr:first-child th {
+    background: linear-gradient(135deg, #28367f 0%, #28367f 100%);
     font-size: 16px;
     padding: 15px;
     text-align: center;
     border: none;
     position: relative;
+    color: white;
+    font-weight: 600;
 }
 
 .tabla-estructurada thead tr:first-child th:not(:last-child)::after {
@@ -69,25 +75,59 @@ h1 {
     background-color: rgba(255,255,255,0.3);
 }
 
-/* Subencabezado */
-.tabla-estructurada thead tr.subheader {
-    background: linear-gradient(135deg, #1275bb, #1275bb);
+/* Estilos para encabezados */
+th {
+    background-color: #3498db;
+    border: 1px solid #1275bb;
     color: white;
     font-weight: 600;
+    padding: 14px 16px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 100; /* Aumentado para asegurar visibilidad */
 }
 
-.tabla-estructurada thead tr.subheader th {
-    padding: 12px 10px;
+/* Estilo para el subencabezado */
+.tabla-estructurada thead tr.subheader td {
+    background: linear-gradient(135deg, #1275bb, #1275bb);
+    color: white;
     font-weight: 500;
+    padding: 10px 16px;
     text-align: left;
-    border-right: 1px solid rgba(255,255,255,0.1);
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    position: sticky;
+    top: 48px; /* Altura del primer encabezado */
+    z-index: 99; /* Un nivel por debajo del encabezado principal */
 }
 
-.tabla-estructurada thead tr.subheader th:last-child {
-    border-right: none;
+/* Estilos para celdas */
+td {
+    padding: 12px 16px;
+    border: 1px solid #e0e0e0;
+    vertical-align: middle;
+    line-height: 1.5;
 }
 
-/* Cuerpo de la tabla */
+.tabla-estructurada tbody td {
+    padding: 12px 10px;
+    border: 1px solid #e0e0e0;
+    vertical-align: middle;
+}
+
+/* Estilos para filas */
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+.tabla-estructurada tbody tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #f1f7fd;
+}
+
 .tabla-estructurada tbody tr {
     transition: all 0.2s ease;
 }
@@ -98,17 +138,22 @@ h1 {
     box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
-.tabla-estructurada tbody td {
-    padding: 12px 10px;
-    border: 1px solid #e0e0e0;
-    vertical-align: middle;
+/* Estilo para celdas especiales */
+td.destacado {
+    background-color: #e3f2fd;
+    font-weight: 500;
+    color: #1275bb;
 }
 
-.tabla-estructurada tbody tr:nth-child(even) {
-    background-color: #f8f9fa;
+td.negativo {
+    color: #e53935;
+    font-weight: 500;
 }
 
-/* Estilos para celdas específicas */
+td.positivo {
+    color: #43a047;
+    font-weight: 500;
+}
 
 .tabla-estructurada td[data-criticidad="Critico"] {
     background-color: #ffecec;
@@ -119,6 +164,70 @@ h1 {
 .tabla-estructurada td[data-criticidad="No Critico"] {
     background-color: #f0fff0;
     color: #388e3c;
+}
+
+td[data-tipo="Maestro"] {
+    font-weight: 600;
+    color: #1a73e8;
+}
+
+td[data-tipo="Referencia"] {
+    color: #666;
+}
+
+/* Bordes redondeados para la tabla */
+table {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+/* Estilo para tablas compactas */
+.tabla-compacta th,
+.tabla-compacta td {
+    padding: 8px 12px;
+    font-size: 0.9em;
+}
+
+/* Estilo para tablas con bordes visibles */
+.tabla-bordeada {
+    border: 1px solid #e0e0e0;
+}
+
+.tabla-bordeada th,
+.tabla-bordeada td {
+    border: 1px solid #e0e0e0;
+}
+
+/* Estilo para celdas de encabezado izquierdo */
+th.celda-izquierda {
+    text-align: left;
+    background-color: #2c3e50;
+}
+
+/* Efecto de transición para filas */
+tr {
+    transition: background-color 0.2s ease;
+}
+
+/* Scroll personalizado para tablas con overflow */
+.tabla-contenedor::-webkit-scrollbar {
+    width: 7px;
+    height: 8px;
+}
+
+
+.tabla-contenedor::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.tabla-contenedor::-webkit-scrollbar-thumb {
+    background: #6ebce9;
+    border-radius: 4px;
+}
+
+.tabla-contenedor::-webkit-scrollbar-thumb:hover {
+    background: #1275bb;
 }
 
 /* Botón de volver */
@@ -162,12 +271,11 @@ footer {
     color: white;
     margin-top: 40px;
     font-size: 14px;
-
 }
 
 .footer-flex {
     display: flex;
-    flex-direction: column; /* Cambia a columna */
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0px;
@@ -189,152 +297,6 @@ footer {
     .tabla-contenedor {
         margin: 15px 0;
     }
-}
-
-/* Mejoras para la legibilidad */
-td {
-    line-height: 1.5;
-}
-
-/* Resaltar campos importantes */
-td[data-tipo="Maestro"] {
-    font-weight: 600;
-    color: #1a73e8;
-}
-
-td[data-tipo="Referencia"] {
-    color: #666;
-}
-/* Estilos para tablas - Versión mejorada */
-.tabla-contenedor {
-    margin: 30px 0;
-    overflow-x: auto;
-    background-color: white;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-    padding: 0;
-    width: 100%;
-    min-width: 100%;
-    table-layout: fixed
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-    margin: 0;
-    font-size: 0.95em;
-    min-width: 600px; /* Ancho mínimo para tablas responsivas */
-}
-
-th {
-    background-color: #3498db;
-    border: 1px solid #1275bb;
-    color: white;
-    font-weight: 600;
-    padding: 14px 16px;
-    text-align: center;
-    position: sticky;
-    top: 0;
-}
-
-/* Estilo para el subencabezado */
-.tabla-estructurada thead tr.subheader th {
-    background-color: #1275bb;
-    color: white;
-    font-weight: 500;
-    padding: 10px 16px;
-    text-align: left;
-    border-bottom: 1px solid rgba(255,255,255,0.1);
-}
-
-td {
-    padding: 12px 16px;
-    border: 1px solid #e0e0e0;
-    vertical-align: middle;
-    line-height: 1.5;
-}
-
-tr:nth-child(even) {
-    background-color: #f8f9fa;
-}
-
-tr:hover {
-    background-color: #f1f7fd;
-}
-
-/* Estilo para celdas especiales */
-td.destacado {
-    background-color: #e3f2fd;
-    font-weight: 500;
-    color: #1275bb;
-}
-
-td.negativo {
-    color: #e53935;
-    font-weight: 500;
-}
-
-td.positivo {
-    color: #43a047;
-    font-weight: 500;
-}
-
-/* Bordes redondeados para la tabla */
-table {
-    border-radius: 8px;
-    overflow: hidden;
-}
-
-/* Cabecera con gradiente */
-.tabla-estructurada thead tr:first-child th {
-    background: linear-gradient(135deg, #28367f 0%, #28367f 100%);
-}
-
-/* Estilo para tablas compactas */
-.tabla-compacta th,
-.tabla-compacta td {
-    padding: 8px 12px;
-    font-size: 0.9em;
-}
-
-/* Estilo para tablas con bordes visibles */
-.tabla-bordeada {
-    border: 1px solid #e0e0e0;
-}
-
-.tabla-bordeada th,
-.tabla-bordeada td {
-    border: 1px solid #e0e0e0;
-}
-
-/* Estilo para celdas de encabezado izquierdo */
-th.celda-izquierda {
-    text-align: left;
-    background-color: #2c3e50;
-}
-
-/* Efecto de transición para filas */
-tr {
-    transition: background-color 0.2s ease;
-}
-
-/* Scroll personalizado para tablas con overflow */
-.tabla-contenedor::-webkit-scrollbar {
-    height: 8px;
-}
-
-.tabla-contenedor::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 4px;
-}
-
-.tabla-contenedor::-webkit-scrollbar-thumb {
-    background: #6ebce9;
-    border-radius: 4px;
-}
-
-.tabla-contenedor::-webkit-scrollbar-thumb:hover {
-    background: #1275bb;
 }
 
 /* Resalta los porcentajes (Usar si es necesario)
