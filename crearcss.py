@@ -43,7 +43,7 @@ h1 {
     padding: 0;
     width: 100%;
     min-width: 100%;
-    table-layout: fixed;
+    position: relative;
 }
 
 /* Estructura de tabla unificada */
@@ -54,6 +54,13 @@ h1 {
     min-width: 1200px;
 }
 
+        /* Cabecera con posición sticky */
+        .tabla-estructurada thead {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
 .tabla-estructurada thead tr:first-child th {
     background: linear-gradient(135deg, #28367f 0%, #28367f 100%);
     font-size: 16px;
@@ -63,6 +70,7 @@ h1 {
     position: relative;
     color: white;
     font-weight: 600;
+    
 }
 
 .tabla-estructurada thead tr:first-child th:not(:last-child)::after {
@@ -175,11 +183,6 @@ td[data-tipo="Referencia"] {
     color: #666;
 }
 
-/* Bordes redondeados para la tabla */
-table {
-    border-radius: 8px;
-    overflow: hidden;
-}
 
 /* Estilo para tablas compactas */
 .tabla-compacta th,
