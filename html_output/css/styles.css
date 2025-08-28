@@ -54,12 +54,12 @@ h1 {
     min-width: 1200px;
 }
 
-        /* Cabecera con posición sticky */
-        .tabla-estructurada thead {
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
+/* Cabecera con posición sticky */
+.tabla-estructurada thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
 
 .tabla-estructurada thead tr:first-child th {
     background: linear-gradient(135deg, #28367f 0%, #28367f 100%);
@@ -289,6 +289,95 @@ footer {
     display: block;
     margin: 0;
 }
+/* Estilos buscador*/
+h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .contenedor-indice {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: #004d99;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #eaeaea;
+        }
+        
+        .buscador {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .buscador input {
+            width: 97%;
+            padding: 15px 20px;
+            border: 2px solid #ddd;
+            border-radius: 50px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .buscador input:focus {
+            outline: none;
+            border-color: #1a6fc4;
+            box-shadow: 0 0 0 3px rgba(26, 111, 196, 0.2);
+        }
+        
+        .buscador i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #888;
+        }
+        
+        .lista-indice {
+            list-style-type: none;
+        }
+        
+        .lista-indice li {
+            margin-bottom: 15px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            border-left: 4px solid #1a6fc4;
+        }
+        
+        .lista-indice li:hover {
+            background-color: #e9f0f7;
+            transform: translateX(5px);
+        }
+        
+        .lista-indice a {
+            text-decoration: none;
+            color: #004d99;
+            font-weight: 500;
+            font-size: 1.1rem;
+            display: block;
+            transition: color 0.2s ease;
+        }
+        
+        .lista-indice a:hover {
+            color: #003366;
+        }
+        
+        .sin-resultados {
+            text-align: center;
+            padding: 20px;
+            color: #666;
+            font-style: italic;
+            display: none;
+        }
+
 
 /* Efectos de scroll para tablas grandes */
 @media (max-width: 1200px) {
@@ -300,6 +389,13 @@ footer {
     .tabla-contenedor {
         margin: 15px 0;
     }
+    .contenedor-indice {
+                padding: 20px;
+    }
+            
+    .buscador input {
+    padding: 12px 15px;
+    }   
 }
 
 /* Resalta los porcentajes (Usar si es necesario)

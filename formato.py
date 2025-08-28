@@ -63,7 +63,7 @@ def delete_fuenteoficial(html_file):
     # Identificar los índices de las columnas que contienen "(Fuente Oficial)"
     cols_to_delete = []
     for idx, th in enumerate(subheader_row.find_all(['th', 'td'])):
-        if 'Base de Datos' in th.get_text() or 'Servidor' in th.get_text() or 'Tabla' in th.get_text():
+        if '(Fuente Oficial)' in th.get_text():
             cols_to_delete.append(idx)
 
     if not cols_to_delete:

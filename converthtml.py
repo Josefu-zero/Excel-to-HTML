@@ -383,30 +383,91 @@ def generar_indice_general(indice, carpeta_salida='html_output'):
     html = f"""<!DOCTYPE html>
 <html>
 <head>
-    <meta charset=\"UTF-8\">
+    <meta charset="UTF-8">
     <title>Libros de Dominios</title>
-    <link rel=\"stylesheet\" href=\"css/styles.css\">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
+
 <body>
-    <header><h1>Libros de Dominos</h1></header>
-    <div class=\"contenedor-indice\">
-        <h2>Indice de Contenidos</h2>
-        <ul class=\"lista-indice\">
+    <header>
+        <h1>Libros de Dominios</h1>
+    </header>
+    
+    <div class="contenedor-indice">
+        <h2>Índice de Contenidos</h2>
+        
+        <!-- Buscador añadido aquí -->
+        <div class="buscador">
+            <input type="text" id="buscador-input" placeholder="Buscar libro por nombre...">
+        </div>
+        
+        <ul class="lista-indice" id="lista-libros">
 """
     for item in indice:
         html += f'<li><a href="{item["archivo"]}">{item["nombre"]}</a></li>\n'
     
     html += f"""        </ul>
+           <div class="sin-resultados" id="sin-resultados">
+            No se encontraron libros que coincidan con la búsqueda.
         </div>
-        <footer>
-            <div class="footer-flex">
-                <img src="assets/azul_sdgdtic.png" alt="Logo secretaria de Gobierno Digital y Tecnología de la Información y Comunicaciones">
-                <span>&copy; 2025</span>
-            </div>
-        </footer>
-    </body>
-    </html>
-    """
+    </div>
+    
+    <footer>
+        <div class="footer-flex">
+            <img src="assets/azul_sdgdtic.png" alt="Logo secretaria de Gobierno Digital y Tecnología de la Información y Comunicaciones">
+            <span>&copy; 2025</span>
+        </div>
+    </footer>
+  """
+    html += """  
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const buscadorInput = document.getElementById('buscador-input');
+            const lista = document.getElementById('lista-libros');
+            const items = lista.getElementsByTagName('li');
+            const sinResultados = document.getElementById('sin-resultados');
+            
+            // Función para filtrar los libros
+            function filtrarLibros() {
+                const texto = buscadorInput.value.toLowerCase();
+                let resultados = 0;
+                
+                // Recorrer todos los elementos de la lista
+                for (let i = 0; i < items.length; i++) {
+                    const textoItem = items[i].textContent || items[i].innerText;
+                    
+                    // Mostrar u ocultar elementos según coincidan con la búsqueda
+                    if (textoItem.toLowerCase().indexOf(texto) > -1) {
+                        items[i].style.display = "";
+                        resultados++;
+                    } else {
+                        items[i].style.display = "none";
+                    }
+                }
+                
+                // Mostrar mensaje si no hay resultados
+                if (resultados === 0) {
+                    sinResultados.style.display = "block";
+                } else {
+                    sinResultados.style.display = "none";
+                }
+            }
+            
+            // Escuchar el evento de entrada en el buscador
+            buscadorInput.addEventListener('input', filtrarLibros);
+            
+            // También se puede agregar para que funcione con la tecla Enter
+            buscadorInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    filtrarLibros();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+"""
     
     with open(f"{carpeta_salida}/indice.html", 'w', encoding='utf-8') as f:
         f.write(html)
